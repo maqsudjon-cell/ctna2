@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Trainer 2 — Test 2 Listening</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #f8f7f4; --surface: #fff; --border: #e2ddd6; --border-light: #ede9e3;
+    --text-primary: #1a1714; --text-secondary: #5a5550; --text-muted: #9a948e;
+    --accent: #1e6b4a; --accent-light: #e8f4ef; --accent-hover: #155438;
+    --red: #c0392b; --red-light: #fdf0ef;
+    --blue: #1a4a7a; --blue-light: #eef3f9;
+    --gold: #8b6914; --gold-light: #fdf8ee;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06); --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+    --radius: 8px; --radius-lg: 12px;
+  }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text-primary); line-height: 1.6; min-height: 100vh; }
+
+  /* Header */
+  .site-header { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm); }
+  .header-inner { max-width: 920px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 16px; }
+  .header-title { font-family: 'Source Serif 4', serif; font-size: 1.05rem; font-weight: 600; white-space: nowrap; display: flex; align-items: center; gap: 10px; }
+  .header-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: var(--radius); font-family: inherit; font-size: 0.8rem; font-weight: 500; cursor: pointer; border: none; transition: all 0.18s; white-space: nowrap; }
+  .btn-ghost { background: transparent; color: var(--text-secondary); border: 1px solid var(--border); }
+  .btn-ghost:hover { background: var(--bg); color: var(--text-primary); }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent-hover); }
+  .progress-pill { font-size: 0.78rem; color: var(--text-muted); background: var(--bg); border: 1px solid var(--border); padding: 4px 12px; border-radius: 20px; }
+  .progress-pill span { color: var(--accent); font-weight: 600; }
+  .mode-badge { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 3px 9px; border-radius: 4px; color: #fff; background: var(--accent); }
+  .mode-badge.sim { background: var(--red); }
+
+  .page-wrap { max-width: 920px; margin: 0 auto; padding: 24px 24px 80px; }
+  .page-heading { margin-bottom: 16px; padding-bottom: 18px; border-bottom: 1px solid var(--border); }
+  .page-heading h1 { font-family: 'Source Serif 4', serif; font-size: 1.7rem; font-weight: 600; margin-bottom: 4px; }
+  .page-heading p { color: var(--text-muted); font-size: 0.85rem; }
+
+  /* Start banner */
+  .start-banner { background: var(--accent); color: #fff; padding: 22px 24px; border-radius: var(--radius-lg); margin-bottom: 24px; text-align: center; box-shadow: var(--shadow-md); }
+  .start-banner h3 { font-family: 'Source Serif 4', serif; font-size: 1.25rem; margin-bottom: 6px; }
+  .start-banner p { font-size: 0.85rem; opacity: 0.92; margin-bottom: 14px; }
+  .btn-start { background: #fff; color: var(--accent); border: none; padding: 11px 36px; border-radius: var(--radius); font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: transform 0.15s; }
+  .btn-start:hover { transform: scale(1.04); }
+
+  /* Banners */
+  .now-playing, .review-banner { position: sticky; top: 60px; z-index: 90; color: #fff; padding: 9px 24px; font-size: 0.85rem; font-weight: 600; display: none; align-items: center; justify-content: space-between; gap: 10px; box-shadow: var(--shadow-sm); }
+  .now-playing { background: linear-gradient(90deg, var(--accent), #2a9870); }
+  .now-playing.show, .review-banner.show { display: flex; }
+  .review-banner { background: linear-gradient(90deg, #b48a00, var(--gold)); }
+  .pulse { display: inline-block; width: 10px; height: 10px; background: #ffd633; border-radius: 50%; animation: pulse 1.2s infinite; margin-right: 8px; }
+  @keyframes pulse { 0%,100%{opacity:0.5;transform:scale(1);} 50%{opacity:1;transform:scale(1.3);} }
+
+  /* Audio sticky panel */
+  .audio-sticky { position: sticky; top: 60px; z-index: 95; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 12px 16px; margin-bottom: 18px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; box-shadow: var(--shadow-sm); }
+  .audio-sticky audio { flex: 1; min-width: 280px; height: 36px; }
+  .audio-label { font-size: 0.78rem; color: var(--text-muted); white-space: nowrap; }
+  .audio-label strong { color: var(--accent); }
+  .speed-row { display: inline-flex; align-items: center; gap: 4px; }
+  .speed-row .label { font-size: 0.72rem; color: var(--text-muted); margin-right: 4px; }
+  .speed-btn { border: 1px solid var(--border); background: var(--bg); color: var(--text-secondary); border-radius: 4px; padding: 4px 10px; font-size: 0.75rem; cursor: pointer; font-family: inherit; transition: all 0.15s; }
+  .speed-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .speed-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  /* Part tabs */
+  .part-tabs { display: flex; gap: 4px; margin-bottom: 18px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 6px; }
+  .part-tab { flex: 1; padding: 9px 6px; text-align: center; cursor: pointer; border-radius: 7px; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); transition: all 0.15s; border: none; background: transparent; font-family: inherit; }
+  .part-tab:hover { background: var(--bg); }
+  .part-tab.active { background: var(--accent); color: #fff; }
+  .part-tab small { display: block; font-size: 0.68rem; opacity: 0.8; margin-top: 2px; font-weight: 500; }
+
+  /* Part section */
+  .part-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); margin-bottom: 24px; overflow: hidden; box-shadow: var(--shadow-sm); display: none; }
+  .part-section.active { display: block; }
+  .part-header { padding: 14px 22px; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; gap: 12px; background: #fafaf8; flex-wrap: wrap; }
+  .part-badge { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #fff; background: var(--accent); padding: 3px 10px; border-radius: 4px; }
+  .part-range { font-size: 0.8rem; color: var(--text-muted); font-style: italic; }
+  .part-body { padding: 22px; }
+  .section-title { font-family: 'Source Serif 4', serif; font-size: 1.2rem; font-weight: 600; margin-bottom: 4px; }
+  /* IMPROVED: Instructions made larger and BLACK (was muted gray) */
+  .instruction { font-size: 0.95rem; color: var(--text-primary); margin-bottom: 14px; line-height: 1.55; font-weight: 500; }
+  .instruction strong { color: var(--text-primary); font-weight: 700; }
+  .q-label { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin: 18px 0 10px; }
+
+  /* Form / notes (Part 1) */
+  .form-card { background: #fefefe; border: 1px solid var(--border); border-radius: var(--radius); margin: 14px 0; overflow: hidden; }
+  .form-card-title { background: var(--accent); color: #fff; text-align: center; padding: 10px 16px; font-family: 'Source Serif 4', serif; font-size: 1rem; font-weight: 600; }
+  .form-card-body { padding: 14px 18px; }
+  .form-card h5 { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); margin: 12px 0 6px; border-bottom: 1px solid var(--accent-light); padding-bottom: 4px; }
+  .form-card ul { list-style: none; padding-left: 4px; }
+  .form-card ul li { padding: 4px 0; font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; }
+  .form-card ul li::before { content: "•"; color: var(--accent); margin-right: 6px; }
+  .form-card .static-val { color: var(--text-muted); font-style: italic; }
+
+  /* Inputs */
+  input[type="text"].ans-input { border: 1.5px solid var(--border); border-radius: 5px; padding: 4px 9px; font-family: inherit; font-size: 0.85rem; color: var(--text-primary); background: #fff; outline: none; width: 130px; transition: border-color 0.15s; vertical-align: middle; }
+  input[type="text"].ans-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(30,107,74,0.1); }
+  input[type="text"].ans-input.correct { border-color: var(--accent); background: var(--accent-light); }
+  input[type="text"].ans-input.incorrect { border-color: var(--red); background: var(--red-light); }
+  .qnum-prefix { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; height: 22px; background: var(--accent); color: #fff; border-radius: 4px; padding: 2px 7px; font-size: 0.72rem; font-weight: 700; margin-right: 5px; }
+
+  /* MCQ */
+  .mcq-group { margin: 12px 0 18px; }
+  .mcq-question { font-size: 0.92rem; margin-bottom: 8px; line-height: 1.5; font-weight: 600; color: var(--text-primary); }
+  .mcq-question .qnum { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; background: var(--accent-light); color: var(--accent); border-radius: 50%; font-size: 0.74rem; font-weight: 700; margin-right: 8px; }
+  .mcq-options { display: flex; flex-direction: column; gap: 6px; }
+  .mcq-option { display: flex; align-items: flex-start; gap: 9px; padding: 7px 11px; border: 1.5px solid var(--border); border-radius: 7px; cursor: pointer; transition: all 0.15s; font-size: 0.85rem; color: var(--text-secondary); background: var(--bg); }
+  .mcq-option:hover { border-color: var(--accent); background: var(--accent-light); color: var(--text-primary); }
+  .mcq-option input[type="radio"] { display: none; }
+  .mcq-radio { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--border); flex-shrink: 0; margin-top: 1px; position: relative; display: flex; align-items: center; justify-content: center; }
+  .mcq-option.selected { border-color: var(--accent); background: var(--accent-light); color: var(--text-primary); }
+  .mcq-option.selected .mcq-radio { border-color: var(--accent); background: var(--accent); }
+  .mcq-option.selected .mcq-radio::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #fff; position: absolute; }
+  .opt-letter { font-weight: 600; color: var(--text-muted); min-width: 14px; font-size: 0.78rem; }
+  .mcq-option.selected .opt-letter { color: var(--accent); }
+
+  /* Multi-select */
+  .multi-count { font-size: 0.78rem; color: var(--text-muted); background: var(--bg); border: 1px solid var(--border); padding: 3px 10px; border-radius: 20px; display: inline-block; margin-bottom: 10px; }
+  .multi-count span { color: var(--accent); font-weight: 600; }
+  .multi-option { display: flex; align-items: flex-start; gap: 10px; padding: 7px 11px; border: 1.5px solid var(--border); border-radius: 7px; cursor: pointer; transition: all 0.15s; font-size: 0.85rem; color: var(--text-secondary); background: var(--bg); margin-bottom: 6px; }
+  .multi-option:hover { border-color: var(--accent); background: var(--accent-light); }
+  .multi-option.selected { border-color: var(--accent); background: var(--accent-light); color: var(--text-primary); }
+  .multi-checkbox { width: 16px; height: 16px; border-radius: 3px; border: 2px solid var(--border); flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: transparent; }
+  .multi-option.selected .multi-checkbox { border-color: var(--accent); background: var(--accent); color: #fff; }
+
+  /* Matching */
+  .matching-key { background: var(--blue-light); border: 1px solid #c8d9ee; border-radius: var(--radius); padding: 12px 16px; margin: 10px 0 14px; }
+  .matching-key div { margin: 3px 0; font-size: 0.84rem; }
+  .matching-key strong { color: var(--blue); }
+  .matching-row { display: flex; align-items: center; gap: 12px; margin: 7px 0; padding: 8px 12px; border: 1px solid var(--border-light); border-radius: 6px; background: var(--bg); }
+  .matching-row .qnum { background: var(--accent); color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 0.74rem; font-weight: 700; flex-shrink: 0; }
+  .matching-row .desc { flex: 1; font-size: 0.85rem; color: var(--text-secondary); }
+  .matching-row select { border: 1.5px solid var(--border); padding: 5px 9px; font-size: 0.85rem; background: #fff; border-radius: 4px; font-family: inherit; min-width: 70px; }
+
+  /* Notes (Part 4) */
+  .notes-card { background: var(--gold-light); border: 1px solid #e8d8a0; border-radius: var(--radius); padding: 16px 20px; margin: 14px 0; }
+  .notes-card h4 { font-family: 'Source Serif 4', serif; font-size: 1rem; font-weight: 600; text-align: center; margin-bottom: 12px; }
+  .notes-card h5 { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); margin: 14px 0 6px; border-bottom: 1px solid #e8d8a0; padding-bottom: 4px; }
+  .notes-card ul { list-style: none; padding-left: 6px; }
+  .notes-card ul li { padding: 5px 0; font-size: 0.875rem; color: var(--text-secondary); line-height: 1.65; }
+  .notes-card ul li::before { content: "•"; color: var(--gold); margin-right: 6px; }
+
+  /* Submit */
+  .submit-wrap { text-align: center; margin-top: 30px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .btn-submit { padding: 12px 38px; font-size: 0.95rem; border-radius: var(--radius); background: var(--accent); color: #fff; border: none; font-weight: 600; cursor: pointer; box-shadow: 0 2px 8px rgba(30,107,74,0.25); }
+  .btn-submit:hover { background: var(--accent-hover); }
+
+  /* Modals */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 200; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal { background: var(--surface); border-radius: var(--radius-lg); padding: 32px 36px; max-width: 420px; width: 90%; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+  .modal-score { font-family: 'Source Serif 4', serif; font-size: 3.2rem; font-weight: 600; color: var(--accent); line-height: 1; margin-bottom: 4px; }
+  .modal-total { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 14px; }
+  .modal-band { display: inline-block; background: var(--accent-light); color: var(--accent); font-weight: 600; font-size: 0.88rem; padding: 6px 18px; border-radius: 20px; margin-bottom: 18px; }
+  .modal-close { padding: 9px 20px; border-radius: var(--radius); background: var(--bg); border: 1px solid var(--border); font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); cursor: pointer; }
+  .modal-close:hover { background: var(--surface); border-color: var(--accent); color: var(--text-primary); }
+
+  /* Mode modal */
+  .mode-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 500; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+  .mode-overlay.open { opacity: 1; pointer-events: all; }
+  .mode-modal { background: var(--surface); border-radius: var(--radius-lg); max-width: 760px; width: 100%; padding: 32px 30px; box-shadow: 0 25px 70px rgba(0,0,0,0.25); }
+  .mode-modal h2 { font-family: 'Source Serif 4', serif; font-size: 1.55rem; font-weight: 600; text-align: center; margin-bottom: 6px; }
+  .mode-modal p.lead { text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px; }
+  .mode-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .mode-card { border: 2px solid var(--border); border-radius: var(--radius); padding: 22px 18px; cursor: pointer; transition: all 0.15s; background: var(--bg); }
+  .mode-card:hover { border-color: var(--accent); background: var(--accent-light); transform: translateY(-2px); }
+  .mode-card.simulation:hover { border-color: var(--red); background: var(--red-light); }
+  .mode-card .icon { font-size: 1.8rem; margin-bottom: 8px; }
+  .mode-card h3 { font-family: 'Source Serif 4', serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 4px; }
+  .mode-card .tagline { font-size: 0.76rem; color: var(--text-muted); margin-bottom: 10px; font-style: italic; }
+  .mode-card ul { list-style: none; }
+  .mode-card ul li { padding: 4px 0 4px 20px; font-size: 0.8rem; color: var(--text-secondary); position: relative; line-height: 1.5; }
+  .mode-card ul li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+  .mode-card.simulation ul li::before { content: "●"; color: var(--red); }
+
+  /* Script & Answers modal */
+  .script-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 300; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s; padding: 20px; }
+  .script-modal-overlay.open { opacity: 1; pointer-events: all; }
+  .script-modal { background: var(--surface); border-radius: var(--radius-lg); max-width: 820px; width: 100%; max-height: 90vh; display: flex; flex-direction: column; box-shadow: 0 25px 70px rgba(0,0,0,0.25); overflow: hidden; }
+  .script-modal-header { padding: 18px 24px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; background: #fafaf8; }
+  .script-modal-header h2 { font-family: 'Source Serif 4', serif; font-size: 1.2rem; font-weight: 600; }
+  .script-modal-close-x { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--border); background: var(--surface); cursor: pointer; font-size: 1rem; }
+  .script-modal-body { padding: 22px 26px; overflow-y: auto; flex: 1; }
+  .answer-row { display: grid; grid-template-columns: 60px 1fr 1fr; gap: 12px; padding: 9px 13px; border: 1px solid var(--border-light); border-radius: var(--radius); margin-bottom: 7px; align-items: center; background: var(--surface); }
+  .answer-row.correct { border-color: var(--accent); background: var(--accent-light); }
+  .answer-row.incorrect { border-color: var(--red); background: var(--red-light); }
+  .answer-row.empty { border-color: var(--border); background: var(--bg); opacity: 0.75; }
+  .answer-q { font-family: 'Source Serif 4', serif; font-size: 0.95rem; font-weight: 600; color: var(--text-muted); }
+  .answer-your, .answer-correct { font-size: 0.85rem; }
+  .answer-label { font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); font-weight: 600; }
+  .answer-value { color: var(--text-primary); font-weight: 500; }
+  .answer-row.correct .answer-your .answer-value { color: var(--accent); }
+  .answer-row.incorrect .answer-your .answer-value { color: var(--red); text-decoration: line-through; }
+  .answer-row .answer-correct .answer-value { color: var(--accent); font-weight: 600; }
+  .answer-value.empty-val { color: var(--text-muted); font-style: italic; }
+  .summary-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 18px; padding: 14px; background: linear-gradient(135deg, var(--accent-light), #fff); border: 1px solid var(--border); border-radius: var(--radius-lg); }
+  .stat-item { text-align: center; }
+  .stat-value { font-family: 'Source Serif 4', serif; font-size: 1.6rem; font-weight: 600; line-height: 1.1; }
+  .stat-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-top: 2px; font-weight: 500; }
+  .stat-correct .stat-value { color: var(--accent); }
+  .stat-wrong .stat-value { color: var(--red); }
+  .stat-band .stat-value { color: var(--gold); }
+
+  /* Highlight popup with Clear option */
+  ::selection { background: #b8e0cf; }
+  .highlighted { background: #fef08a; border-radius: 2px; padding: 0 2px; cursor: pointer; }
+  .highlighted:hover { background: #ffe85a; outline: 1px dashed #d4b94e; }
+  #hl-popup { position: absolute; display: none; z-index: 1500; background: #fff; border: 1px solid var(--border); border-radius: 6px; padding: 0; font-size: 0.75rem; font-weight: 600; box-shadow: 0 3px 14px rgba(0,0,0,0.18); user-select: none; white-space: nowrap; overflow: hidden; }
+  #hl-popup .hl-btn { display: inline-block; padding: 6px 12px; cursor: pointer; transition: background 0.15s; }
+  #hl-popup .hl-btn.highlight { background: #fef08a; color: #4d3d00; }
+  #hl-popup .hl-btn.highlight:hover { background: #ffe85a; }
+  #hl-popup .hl-btn.clear { background: #f5f5f5; color: var(--text-secondary); border-left: 1px solid var(--border); }
+  #hl-popup .hl-btn.clear:hover { background: var(--red-light); color: var(--red); }
+
+  /* Sim-mode overrides */
+  body.sim-mode .audio-sticky { display: none !important; }
+  body.sim-mode .submit-wrap { display: none !important; }
+  body.sim-mode.test-started .start-banner { display: none; }
+  body.practice-mode .start-banner { display: none; }
+  body.sim-mode:not(.test-started) .part-section,
+  body.sim-mode:not(.test-started) .part-tabs { display: none !important; }
+
+  /* Answer key is ONLY accessible via the results modal after submitting (no header button before submit). */
+
+  @media (max-width: 600px) {
+    .header-inner { padding: 8px 14px; height: auto; flex-wrap: wrap; }
+    .page-wrap { padding: 18px 14px 60px; }
+    .part-body { padding: 16px 14px; }
+    .header-title { font-size: 0.92rem; }
+    .mode-cards { grid-template-columns: 1fr; }
+    .matching-row { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Mode selection -->
+<div class="mode-overlay open" id="modeModal">
+  <div class="mode-modal">
+    <h2>Select Test Mode</h2>
+    <p class="lead">How would you like to take this listening test?</p>
+    <div class="mode-cards">
+      <div class="mode-card" onclick="selectMode('practice')">
+        <div class="icon">📚</div>
+        <h3>Practice Mode</h3>
+        <div class="tagline">Learn at your own pace</div>
+        <ul>
+          <li>Full audio controls (play / pause / seek)</li>
+          <li>Adjustable speed (0.75× → 1.5×)</li>
+          <li>Replay any section</li>
+          <li>Submit when ready</li>
+        </ul>
+      </div>
+      <div class="mode-card simulation" onclick="selectMode('simulation')">
+        <div class="icon">🎯</div>
+        <h3>Simulation Mode</h3>
+        <div class="tagline">Real exam conditions</div>
+        <ul>
+          <li>No audio controls</li>
+          <li>All four parts play in sequence</li>
+          <li>30-second gap between parts</li>
+          <li>2-minute final check, auto-submits</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="header-inner">
+    <span class="header-title">
+      IELTS Trainer 2 — Test 2 Listening
+      <span class="mode-badge" id="modeBadge" style="display:none">Practice</span>
+    </span>
+    <div class="header-actions">
+      <span class="progress-pill"><span id="progressCount">0</span>/40</span>
+      <button class="btn btn-ghost" onclick="eraseHighlights()">Clear Highlights</button>
+      <button class="btn btn-ghost" onclick="resetAllAnswers()">↻ Reset</button>
+      <button class="btn btn-ghost" onclick="changeMode()">↺ Mode</button>
+      <!-- The only way to reach the answer key is by submitting first. -->
+      <button class="btn btn-primary" onclick="submitAnswers()">✓ Submit</button>
+    </div>
+  </div>
+</header>
+
+<!-- Inline highlight + clear popup -->
+<div id="hl-popup" onmousedown="event.preventDefault()">
+  <span class="hl-btn highlight" onclick="applyHighlight()">✎ Highlight</span><span class="hl-btn clear" onclick="clearHighlightAt()">✕ Clear</span>
+</div>
+
+<div class="now-playing" id="nowPlaying">
+  <span><span class="pulse"></span><span id="npText">Recording in progress</span></span>
+  <span id="npClock">00:00</span>
+</div>
+<div class="review-banner" id="reviewBanner">
+  <span><span class="pulse"></span>Checking time — auto-submits when timer ends</span>
+  <span id="reviewClock">02:00</span>
+</div>
+
+<main class="page-wrap">
+
+  <div class="page-heading">
+    <h1>IELTS Trainer 2 — Test 2 Listening</h1>
+    <p>40 questions across 4 parts. Cambridge IELTS Trainer 2 (Academic).</p>
+  </div>
+
+  <div class="start-banner" id="startBanner" style="display:none">
+    <h3>Ready to begin?</h3>
+    <p>Audio plays once and runs through all four parts. After the recording ends you'll have 2 minutes to check your answers before they're auto-submitted.</p>
+    <button class="btn-start" onclick="startSimulation()">▶ Start Test</button>
+  </div>
+
+  <!-- Audio -->
+  <div class="audio-sticky" id="audioSticky">
+    <span class="audio-label"><strong>Part <span id="audio-num">1</span></strong> audio:</span>
+    <audio id="player" controls onplay="pauseOtherAudios(this)" preload="metadata" style="width:100%">
+      <source id="audio-src" src="TRACK 12.mp3" type="audio/mpeg">
+    </audio>
+    <div class="speed-row">
+      <span class="label">Speed:</span>
+      <button class="speed-btn" onclick="setSpeed(0.75)">0.75×</button>
+      <button class="speed-btn active" onclick="setSpeed(1)">1×</button>
+      <button class="speed-btn" onclick="setSpeed(1.25)">1.25×</button>
+      <button class="speed-btn" onclick="setSpeed(1.5)">1.5×</button>
+    </div>
+  </div>
+
+  <!-- Part tabs -->
+  <div class="part-tabs">
+    <button class="part-tab active" data-part="1" onclick="switchPart(1)">Part 1<small>Q 1–10</small></button>
+    <button class="part-tab" data-part="2" onclick="switchPart(2)">Part 2<small>Q 11–20</small></button>
+    <button class="part-tab" data-part="3" onclick="switchPart(3)">Part 3<small>Q 21–30</small></button>
+    <button class="part-tab" data-part="4" onclick="switchPart(4)">Part 4<small>Q 31–40</small></button>
+  </div>
+
+  <!-- ════ PART 1 ════ -->
+  <section class="part-section active" id="part-1">
+    <div class="part-header">
+      <span class="part-badge">Part 1</span><span class="part-range">Questions 1–10</span>
+    </div>
+    <div class="part-body">
+      <h2 class="section-title">New Apartment</h2>
+      <p class="instruction">Complete the notes below.<br><strong>Write NO MORE THAN ONE WORD for each answer.</strong></p>
+
+      <div class="form-card">
+        <div class="form-card-title">New Apartment</div>
+        <div class="form-card-body">
+          <p style="font-size:0.85rem; margin-bottom:8px;"><strong>Example:</strong> Landlady's Name — <span class="static-val">Mary Jones</span></p>
+
+          <h5>General</h5>
+          <ul>
+            <li>partly furnished</li>
+            <li>no <span class="qnum-prefix">1</span><input type="text" class="ans-input" data-q="1" oninput="updateProgress()"> are allowed</li>
+          </ul>
+
+          <h5>Kitchen</h5>
+          <ul>
+            <li>nice and big</li>
+            <li>there is a new <span class="qnum-prefix">2</span><input type="text" class="ans-input" data-q="2" oninput="updateProgress()"></li>
+          </ul>
+
+          <h5>Lounge</h5>
+          <ul>
+            <li>some <span class="qnum-prefix">3</span><input type="text" class="ans-input" data-q="3" oninput="updateProgress()"> will be built soon</li>
+          </ul>
+
+          <h5>Bedroom</h5>
+          <ul>
+            <li>good clothes storage</li>
+            <li>need to bring a <span class="qnum-prefix">4</span><input type="text" class="ans-input" data-q="4" oninput="updateProgress()"></li>
+          </ul>
+
+          <h5>Bathroom</h5>
+          <ul>
+            <li>only a shower</li>
+            <li>the water is heated by <span class="qnum-prefix">5</span><input type="text" class="ans-input" data-q="5" oninput="updateProgress()"></li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="instruction" style="margin-top:18px;">Complete the form below.<br><strong>Write ONE WORD AND/OR A NUMBER for each answer.</strong></p>
+
+      <div class="form-card">
+        <div class="form-card-title">Tenancy Form</div>
+        <div class="form-card-body">
+          <h5>Tenant Details</h5>
+          <ul>
+            <li>Full name: Andrew <span class="qnum-prefix">6</span><input type="text" class="ans-input" data-q="6" oninput="updateProgress()"></li>
+            <li>Best contact: andrew171@<span class="qnum-prefix">7</span><input type="text" class="ans-input" data-q="7" oninput="updateProgress()">.com</li>
+            <li>Driver's licence: <span class="qnum-prefix">8</span><input type="text" class="ans-input" data-q="8" oninput="updateProgress()" style="width:170px"></li>
+          </ul>
+
+          <h5>Tenancy Details</h5>
+          <ul>
+            <li>Moving-in date: <span class="qnum-prefix">9</span><input type="text" class="ans-input" data-q="9" oninput="updateProgress()" style="width:140px"></li>
+            <li>Rent per week: <span class="static-val">$315</span></li>
+            <li>Bond paid: $<span class="qnum-prefix">10</span><input type="text" class="ans-input" data-q="10" oninput="updateProgress()"></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ PART 2 ════ -->
+  <section class="part-section" id="part-2">
+    <div class="part-header">
+      <span class="part-badge">Part 2</span><span class="part-range">Questions 11–20</span>
+    </div>
+    <div class="part-body">
+      <h2 class="section-title">Local Events &amp; Festivals</h2>
+
+      <p class="q-label">Questions 11–15 · Choose the correct letter, A, B or C.</p>
+
+      <div class="mcq-group">
+        <div class="mcq-question"><span class="qnum">11</span> What is new about the Writers' Festival this year?</div>
+        <div class="mcq-options">
+          <label class="mcq-option" onclick="selectMCQ(this,'q11')"><input type="radio" name="q11"><span class="mcq-radio"></span><span class="opt-letter">A</span> more international guests</label>
+          <label class="mcq-option" onclick="selectMCQ(this,'q11')"><input type="radio" name="q11"><span class="mcq-radio"></span><span class="opt-letter">B</span> extra time for questions</label>
+          <label class="mcq-option" onclick="selectMCQ(this,'q11')"><input type="radio" name="q11"><span class="mcq-radio"></span><span class="opt-letter">C</span> additional locations for events</label>
+        </div>
+      </div>
+      <div class="mcq-group">
+        <div class="mcq-question"><span class="qnum">12</span> Tickets for the Wearable Art event</div>
+        <div class="mcq-options">
+          <label class="mcq-option" onclick="selectMCQ(this,'q12')"><input type="radio" name="q12"><span class="mcq-radio"></span><span class="opt-letter">A</span> are selling out quickly.</label>
+          <label class="mcq-option" onclick="selectMCQ(this,'q12')"><input type="radio" name="q12"><span class="mcq-radio"></span><span class="opt-letter">B</span> have been reduced in price.</label>
+          <label class="mcq-option" onclick="selectMCQ(this,'q12')"><input type="radio" name="q12"><span class="mcq-radio"></span><span class="opt-letter">C</span> must be booked in advance.</label>
+        </div>
+      </div>
+      <div class="mcq-group">
+        <div class="mcq-question"><span class="qnum">13</span> Ocean Times at Bright's Beach is</div>
+        <div class="mcq-options">
+          <label class="mcq-option" onclick="selectMCQ(this,'q13')"><input type="radio" name="q13"><span class="mcq-radio"></span><span class="opt-letter">A</span> a sporting competition for adults.</label>
+          <label class="mcq-option" onclick="selectMCQ(this,'q13')"><input type="radio" name="q13"><span class="mcq-radio"></span><span class="opt-letter">B</span> an educational event for all ages.</label>
+          <label class="mcq-option" onclick="selectMCQ(this,'q13')"><input type="radio" name="q13"><span class="mcq-radio"></span><span class="opt-letter">C</span> a play day for young children.</label>
+        </div>
+      </div>
+      <div class="mcq-group">
+        <div class="mcq-question"><span class="qnum">14</span> People going to the Artscape Exhibition</div>
+        <div class="mcq-options">
+          <label class="mcq-option" onclick="selectMCQ(this,'q14')"><input type="radio" name="q14"><span class="mcq-radio"></span><span class="opt-letter">A</span> should wear appropriate clothing.</label>
+          <label class="mcq-option" onclick="selectMCQ(this,'q14')"><input type="radio" name="q14"><span class="mcq-radio"></span><span class="opt-letter">B</span> must keep to the proper path.</label>
+          <label class="mcq-option" onclick="selectMCQ(this,'q14')"><input type="radio" name="q14"><span class="mcq-radio"></span><span class="opt-letter">C</span> need to arrive at a certain time.</label>
+        </div>
+      </div>
+      <div class="mcq-group">
+        <div class="mcq-question"><span class="qnum">15</span> Tours of the Civil Theatre</div>
+        <div class="mcq-options">
+          <label class="mcq-option" onclick="selectMCQ(this,'q15')"><input type="radio" name="q15"><span class="mcq-radio"></span><span class="opt-letter">A</span> do not happen often.</label>
+          <label class="mcq-option" onclick="selectMCQ(this,'q15')"><input type="radio" name="q15"><span class="mcq-radio"></span><span class="opt-letter">B</span> have never happened before.</label>
+          <label class="mcq-option" onclick="selectMCQ(this,'q15')"><input type="radio" name="q15"><span class="mcq-radio"></span><span class="opt-letter">C</span> may happen more regularly in future.</label>
+        </div>
+      </div>
+
+      <p class="q-label">Questions 16–20 · Match each event with the correct comment (A, B or C).</p>
+      <p class="instruction">What comment does the speaker make about each of the following events? You may use any letter more than once.</p>
+
+      <div class="matching-key">
+        <div><strong>A</strong> — the location has changed</div>
+        <div><strong>B</strong> — transport will be a problem</div>
+        <div><strong>C</strong> — the event might be crowded</div>
+      </div>
+
+      <div class="matching-row"><span class="qnum">16</span><span class="desc">Night Market</span>
+        <select data-q="16" onchange="updateProgress()"><option value=""></option><option>A</option><option>B</option><option>C</option></select></div>
+      <div class="matching-row"><span class="qnum">17</span><span class="desc">Buskers Festival</span>
+        <select data-q="17" onchange="updateProgress()"><option value=""></option><option>A</option><option>B</option><option>C</option></select></div>
+      <div class="matching-row"><span class="qnum">18</span><span class="desc">Stand Up for Kids</span>
+        <select data-q="18" onchange="updateProgress()"><option value=""></option><option>A</option><option>B</option><option>C</option></select></div>
+      <div class="matching-row"><span class="qnum">19</span><span class="desc">Sunday Unplugged</span>
+        <select data-q="19" onchange="updateProgress()"><option value=""></option><option>A</option><option>B</option><option>C</option></select></div>
+      <div class="matching-row"><span class="qnum">20</span><span class="desc">Ignite Dance Finals</span>
+        <select data-q="20" onchange="updateProgress()"><option value=""></option><option>A</option><option>B</option><option>C</option></select></div>
+    </div>
+  </section>
+
+  <!-- ════ PART 3 ════ -->
+  <section class="part-section" id="part-3">
+    <div class="part-header">
+      <span class="part-badge">Part 3</span><span class="part-range">Questions 21–30</span>
+    </div>
+    <div class="part-body">
+      <h2 class="section-title">Research on Babies' Learning</h2>
+
+      <p class="q-label">Questions 21–22 · Choose TWO letters, A–E.</p>
+      <p class="instruction">What <strong>TWO</strong> problems do the students identify with 'learning videos'?</p>
+
+      <div class="multi-count">Selected: <span id="g1Count">0</span>/2</div>
+      <label class="multi-option" onclick="selectMulti(this,'g1','A')"><span class="multi-checkbox">✓</span><span class="opt-letter">A</span> Babies lose interest too quickly.</label>
+      <label class="multi-option" onclick="selectMulti(this,'g1','B')"><span class="multi-checkbox">✓</span><span class="opt-letter">B</span> Babies need to explore things.</label>
+      <label class="multi-option" onclick="selectMulti(this,'g1','C')"><span class="multi-checkbox">✓</span><span class="opt-letter">C</span> Babies want to be with other babies.</label>
+      <label class="multi-option" onclick="selectMulti(this,'g1','D')"><span class="multi-checkbox">✓</span><span class="opt-letter">D</span> Babies' eyes may be damaged.</label>
+      <label class="multi-option" onclick="selectMulti(this,'g1','E')"><span class="multi-checkbox">✓</span><span class="opt-letter">E</span> Babies should have contact with adults.</label>
+
+      <p class="q-label">Questions 23–24 · Choose TWO letters, A–E.</p>
+      <p class="instruction">When discussing the 'present research', Maia is surprised that</p>
+
+      <div class="multi-count">Selected: <span id="g2Count">0</span>/2</div>
+      <label class="multi-option" onclick="selectMulti(this,'g2','A')"><span class="multi-checkbox">✓</span><span class="opt-letter">A</span> ordinary people have altered their habits.</label>
+      <label class="multi-option" onclick="selectMulti(this,'g2','B')"><span class="multi-checkbox">✓</span><span class="opt-letter">B</span> the findings are very detailed.</label>
+      <label class="multi-option" onclick="selectMulti(this,'g2','C')"><span class="multi-checkbox">✓</span><span class="opt-letter">C</span> most babies behave the same way.</label>
+      <label class="multi-option" onclick="selectMulti(this,'g2','D')"><span class="multi-checkbox">✓</span><span class="opt-letter">D</span> boys and girls like different toys.</label>
+      <label class="multi-option" onclick="selectMulti(this,'g2','E')"><span class="multi-checkbox">✓</span><span class="opt-letter">E</span> the methodology has been criticised.</label>
+
+      <p class="q-label">Questions 25–26 · Choose TWO letters, A–E.</p>
+      <p class="instruction">What impresses the students about the bilingual experiment in Spain?</p>
+
+      <div class="multi-count">Selected: <span id="g3Count">0</span>/2</div>
+      <label class="multi-option" onclick="selectMulti(this,'g3','A')"><span class="multi-checkbox">✓</span><span class="opt-letter">A</span> the long-term effects of the lessons</label>
+      <label class="multi-option" onclick="selectMulti(this,'g3','B')"><span class="multi-checkbox">✓</span><span class="opt-letter">B</span> the large number of research subjects</label>
+      <label class="multi-option" onclick="selectMulti(this,'g3','C')"><span class="multi-checkbox">✓</span><span class="opt-letter">C</span> the fact that the children enjoyed themselves</label>
+      <label class="multi-option" onclick="selectMulti(this,'g3','D')"><span class="multi-checkbox">✓</span><span class="opt-letter">D</span> the fact that teachers had the same training</label>
+      <label class="multi-option" onclick="selectMulti(this,'g3','E')"><span class="multi-checkbox">✓</span><span class="opt-letter">E</span> the response of schools to the findings</label>
+
+      <p class="q-label">Questions 27–30 · Match each research study with its finding (A–F).</p>
+      <p class="instruction">What was the finding of each of the following research studies? Choose <strong>FOUR</strong> answers from the box.</p>
+
+      <div class="matching-key">
+        <div><strong>A</strong> — Babies understand cause and effect.</div>
+        <div><strong>B</strong> — Babies like physical exercise.</div>
+        <div><strong>C</strong> — Babies like their actions to be copied.</div>
+        <div><strong>D</strong> — Babies are excited by surprises.</div>
+        <div><strong>E</strong> — Babies recognise basic grammar.</div>
+        <div><strong>F</strong> — Babies like to help other people.</div>
+      </div>
+
+      <div class="matching-row"><span class="qnum">27</span><span class="desc">Dr Pritchard's study</span>
+        <select data-q="27" onchange="updateProgress()"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></div>
+      <div class="matching-row"><span class="qnum">28</span><span class="desc">The three-year-olds study</span>
+        <select data-q="28" onchange="updateProgress()"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></div>
+      <div class="matching-row"><span class="qnum">29</span><span class="desc">Professor Michelson's study</span>
+        <select data-q="29" onchange="updateProgress()"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></div>
+      <div class="matching-row"><span class="qnum">30</span><span class="desc">The United States study</span>
+        <select data-q="30" onchange="updateProgress()"><option value=""></option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></select></div>
+    </div>
+  </section>
+
+  <!-- ════ PART 4 ════ -->
+  <section class="part-section" id="part-4">
+    <div class="part-header">
+      <span class="part-badge">Part 4</span><span class="part-range">Questions 31–40</span>
+    </div>
+    <div class="part-body">
+      <h2 class="section-title">The Engineer Sarah Guppy, 1770–1852</h2>
+      <p class="instruction">Complete the notes below.<br><strong>Write ONE WORD ONLY for each answer.</strong></p>
+
+      <div class="notes-card">
+        <h4>The Engineer Sarah Guppy, 1770–1852</h4>
+
+        <h5>Background</h5>
+        <ul>
+          <li>women were active in many areas of 19th-century British society — e.g. Jane Harrison was the first female <span class="qnum-prefix">31</span><input type="text" class="ans-input" data-q="31" oninput="updateProgress()"></li>
+          <li>by the end of the century there were 140 female dentists and 212 <span class="qnum-prefix">32</span><input type="text" class="ans-input" data-q="32" oninput="updateProgress()">, as well as many musicians and actors</li>
+        </ul>
+
+        <h5>Sarah Guppy</h5>
+        <ul>
+          <li>was born in Birmingham and moved to Bristol with her husband</li>
+          <li>designed bridges that could survive <span class="qnum-prefix">33</span><input type="text" class="ans-input" data-q="33" oninput="updateProgress()"></li>
+          <li>built <span class="qnum-prefix">34</span><input type="text" class="ans-input" data-q="34" oninput="updateProgress()"> of the Clifton Suspension Bridge</li>
+          <li>was a significant <span class="qnum-prefix">35</span><input type="text" class="ans-input" data-q="35" oninput="updateProgress()"> in the Clifton Suspension Bridge together with her husband</li>
+          <li>designed a 'barnacle buster' that allowed <span class="qnum-prefix">36</span><input type="text" class="ans-input" data-q="36" oninput="updateProgress()"> to go faster</li>
+          <li>helped stop <span class="qnum-prefix">37</span><input type="text" class="ans-input" data-q="37" oninput="updateProgress()"> near railway lines</li>
+          <li>built an amusing machine for making different parts of <span class="qnum-prefix">38</span><input type="text" class="ans-input" data-q="38" oninput="updateProgress()"> at the same time</li>
+          <li>designed an early type of <span class="qnum-prefix">39</span><input type="text" class="ans-input" data-q="39" oninput="updateProgress()"> equipment</li>
+        </ul>
+
+        <h5>Conclusions</h5>
+        <ul>
+          <li>other women worked as engineers, e.g. Ada Lovelace and Hertha Marks Ayrton</li>
+          <li>it was not until 1906 that a woman <span class="qnum-prefix">40</span><input type="text" class="ans-input" data-q="40" oninput="updateProgress()"> in engineering</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="submit-wrap">
+    <button class="btn-submit" onclick="submitAnswers()">Submit Answers</button>
+  </div>
+</main>
+
+<!-- Results modal -->
+<div class="modal-overlay" id="resultsModal">
+  <div class="modal">
+    <div style="font-size:2rem; margin-bottom:8px">🎯</div>
+    <div class="modal-score" id="modalScore">–</div>
+    <div class="modal-total">out of 40</div>
+    <div class="modal-band" id="modalBand">Estimated Band –</div>
+    <br>
+    <button class="modal-close" onclick="openScriptFromResults()" style="background:var(--accent);color:#fff;border-color:var(--accent);margin-right:8px">📄 Review Answers</button>
+    <button class="modal-close" onclick="closeModal()">✕ Close</button>
+  </div>
+</div>
+
+<!-- Answer Key modal (only opens after submission) -->
+<div class="script-modal-overlay" id="scriptModal">
+  <div class="script-modal">
+    <div class="script-modal-header">
+      <h2>📄 Answer Key</h2>
+      <button class="script-modal-close-x" onclick="closeScript()">✕</button>
+    </div>
+    <div class="script-modal-body">
+      <div class="summary-stats">
+        <div class="stat-item stat-correct"><div class="stat-value" id="statCorrect">0</div><div class="stat-label">Correct</div></div>
+        <div class="stat-item stat-wrong"><div class="stat-value" id="statWrong">0</div><div class="stat-label">Incorrect</div></div>
+        <div class="stat-item stat-band"><div class="stat-value" id="statBand">–</div><div class="stat-label">Est. Band</div></div>
+      </div>
+      <div id="answerRows"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ═══ ANSWER KEY — IELTS Trainer 2 Test 2 (Listening) ═══ */
+const correctAnswers = {
+  // Part 1 — New Apartment + Tenancy Form
+  1: "pets",
+  2: "fridge",
+  3: "shelves",
+  4: "lamp",
+  5: "gas",
+  6: "connaught",
+  7: "interglobe",
+  8: ["e 738 2991 tp","e7382991tp","e-738-2991-tp"],
+  9: ["7 april","7th april","7/4","7-4","april 7","april 7th"],
+  10: "450",
+  // Part 2 — Local Events & Festivals
+  11: "C", 12: "B", 13: "B", 14: "A", 15: "A",
+  16: "C", 17: "A", 18: "B", 19: "B", 20: "C",
+  // Part 3 — Babies research
+  // Q21-22 multi: B, E
+  // Q23-24 multi: B, C
+  // Q25-26 multi: A, D
+  27: "C", 28: "F", 29: "A", 30: "E",
+  // Part 4 — Sarah Guppy
+  31: "academic",
+  32: "doctors",
+  33: "floods",
+  34: "models",
+  35: "investor",
+  36: "ships",
+  37: "erosion",
+  38: "breakfast",
+  39: "gym",
+  40: "graduated"
+};
+const multiCorrect = {
+  g1: ['B','E'],   // Q21-22
+  g2: ['B','C'],   // Q23-24
+  g3: ['A','D']    // Q25-26
+};
+
+/* ═══ AUDIO TRACKS ═══ */
+const audioTracks = {
+  1: 'TRACK 12.mp3',
+  2: 'TRACK 14.mp3',
+  3: 'TRACK 16.mp3',
+  4: 'TRACK 17.mp3'
+};
+
+/* ═══ AUDIO ═══ */
+function pauseOtherAudios(active) {
+  document.querySelectorAll('audio').forEach(a => { if (a !== active && !a.paused) try { a.pause(); } catch(e){} });
+}
+const player = document.getElementById('player');
+const audioSrc = document.getElementById('audio-src');
+const audioNum = document.getElementById('audio-num');
+
+function setSpeed(rate) {
+  player.playbackRate = rate;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.toggle('active', parseFloat(b.textContent) === rate));
+}
+
+function loadTrackForPart(n) {
+  audioSrc.src = audioTracks[n];
+  audioNum.textContent = n;
+  player.load();
+}
+
+function switchPart(n) {
+  document.querySelectorAll('.part-tab').forEach(t => t.classList.remove('active'));
+  document.querySelector(`.part-tab[data-part="${n}"]`).classList.add('active');
+  document.querySelectorAll('.part-section').forEach(s => s.classList.remove('active'));
+  document.getElementById('part-'+n).classList.add('active');
+  if (currentMode !== 'simulation') loadTrackForPart(n);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ═══ MODE LOGIC ═══ */
+let currentMode = null, currentSimSection = 0, reviewInterval = null, simHasStarted = false;
+
+function selectMode(mode) {
+  currentMode = mode;
+  document.getElementById('modeModal').classList.remove('open');
+  const badge = document.getElementById('modeBadge');
+  badge.style.display = 'inline-block';
+  if (mode === 'simulation') {
+    document.body.classList.add('sim-mode');
+    document.body.classList.remove('practice-mode');
+    badge.textContent = 'Simulation';
+    badge.classList.add('sim');
+    document.getElementById('startBanner').style.display = 'block';
+    player.removeAttribute('controls');
+  } else {
+    document.body.classList.add('practice-mode');
+    document.body.classList.remove('sim-mode');
+    badge.textContent = 'Practice';
+    badge.classList.remove('sim');
+  }
+}
+
+function changeMode() {
+  if (!confirm('Change mode? Audio will reset (your answers stay).')) return;
+  try { player.pause(); player.currentTime = 0; } catch(e){}
+  if (reviewInterval) clearInterval(reviewInterval);
+  reviewInterval = null;
+  document.getElementById('nowPlaying').classList.remove('show');
+  document.getElementById('reviewBanner').classList.remove('show');
+  document.body.classList.remove('sim-mode','practice-mode','test-started');
+  player.setAttribute('controls','');
+  simHasStarted = false; currentSimSection = 0;
+  document.getElementById('modeModal').classList.add('open');
+}
+
+function startSimulation() {
+  if (simHasStarted) return;
+  simHasStarted = true;
+  document.body.classList.add('test-started');
+  switchPart(1);
+  playSimSection(0);
+}
+
+/* IMPROVED: 30-second total gap between parts (was 60s = 30s reading + 30s checking) */
+function playSimSection(i) {
+  if (i > 3) return;
+  currentSimSection = i;
+  const np = document.getElementById('nowPlaying');
+  np.classList.add('show');
+  switchPart(i+1);
+  loadTrackForPart(i+1);
+
+  const startPlayback = () => {
+    document.getElementById('npText').textContent = `Section ${i+1} of 4 — Listening`;
+    player.ontimeupdate = () => {
+      const t = Math.floor(player.currentTime);
+      const m = String(Math.floor(t/60)).padStart(2,'0');
+      const s = String(t%60).padStart(2,'0');
+      document.getElementById('npClock').textContent = `${m}:${s}`;
+    };
+    player.onended = () => onSimSectionEnd(i);
+    player.play().catch(() => {
+      np.innerHTML = `<span><span class="pulse"></span>Tap to resume Section ${i+1}</span>`;
+      np.style.cursor = 'pointer';
+      np.onclick = () => { player.play(); np.style.cursor = ''; np.onclick = null; };
+    });
+  };
+
+  if (i === 0) { startPlayback(); return; }
+  // Single 30-second gap (no separate checking + reading)
+  let countdown = 30;
+  document.getElementById('npText').textContent = `Section ${i+1} starts in…`;
+  document.getElementById('npClock').textContent = `00:${String(countdown).padStart(2,'0')}`;
+  const cdInt = setInterval(() => {
+    countdown--;
+    document.getElementById('npClock').textContent = `00:${String(Math.max(countdown,0)).padStart(2,'0')}`;
+    if (countdown <= 0) { clearInterval(cdInt); startPlayback(); }
+  }, 1000);
+}
+
+function onSimSectionEnd(i) {
+  if (currentMode !== 'simulation') return;
+  if (i < 3) {
+    // No checking phase — straight to next part's 30s reading countdown
+    playSimSection(i+1);
+  } else {
+    document.getElementById('nowPlaying').classList.remove('show');
+    startReviewCountdown();
+  }
+}
+
+function startReviewCountdown() {
+  const banner = document.getElementById('reviewBanner');
+  const clock = document.getElementById('reviewClock');
+  banner.classList.add('show');
+  let secs = 120;
+  const tick = () => {
+    const m = String(Math.floor(secs/60)).padStart(2,'0');
+    const s = String(secs%60).padStart(2,'0');
+    clock.textContent = `${m}:${s}`;
+    if (secs <= 0) { clearInterval(reviewInterval); banner.classList.remove('show'); submitAnswers(); return; }
+    secs--;
+  };
+  tick();
+  reviewInterval = setInterval(tick, 1000);
+}
+
+/* ═══ ANSWERS ═══ */
+const multiSelected = { g1: new Set(), g2: new Set(), g3: new Set() };
+
+function getUserAnswers() {
+  const ua = {};
+  document.querySelectorAll('input[type="text"][data-q]').forEach(inp => { ua[parseInt(inp.dataset.q)] = inp.value.trim(); });
+  document.querySelectorAll('select[data-q]').forEach(sel => { ua[parseInt(sel.dataset.q)] = sel.value.trim(); });
+  [11,12,13,14,15].forEach(i => {
+    const sel = document.querySelector(`[name="q${i}"]:checked`);
+    if (sel) ua[i] = sel.closest('.mcq-option').querySelector('.opt-letter').textContent;
+  });
+  return ua;
+}
+
+function isCorrect(u, c) {
+  if (u === undefined || u === null || u === '') return false;
+  const norm = s => s.toString().trim().toLowerCase().replace(/\s+/g,' ');
+  const userNorm = norm(u);
+  if (Array.isArray(c)) return c.some(v => norm(v) === userNorm);
+  return norm(c) === userNorm;
+}
+function displayCorrect(c) { return Array.isArray(c) ? c[0] : c; }
+
+function selectMCQ(el, name) {
+  document.querySelectorAll(`[name="${name}"]`).forEach(r => r.closest('.mcq-option').classList.remove('selected'));
+  el.classList.add('selected');
+  el.querySelector('input').checked = true;
+  updateProgress();
+}
+
+function selectMulti(el, group, letter) {
+  if (el.classList.contains('selected')) {
+    el.classList.remove('selected');
+    multiSelected[group].delete(letter);
+  } else if (multiSelected[group].size < 2) {
+    el.classList.add('selected');
+    multiSelected[group].add(letter);
+  }
+  document.getElementById(group+'Count').textContent = multiSelected[group].size;
+  updateProgress();
+}
+
+function updateProgress() {
+  let count = 0;
+  document.querySelectorAll('input[type="text"][data-q]').forEach(inp => { if (inp.value.trim()) count++; });
+  document.querySelectorAll('select[data-q]').forEach(sel => { if (sel.value.trim()) count++; });
+  [11,12,13,14,15].forEach(i => { if (document.querySelector(`[name="q${i}"]:checked`)) count++; });
+  count += Math.min(multiSelected.g1.size,2) + Math.min(multiSelected.g2.size,2) + Math.min(multiSelected.g3.size,2);
+  document.getElementById('progressCount').textContent = count;
+}
+
+function bandFor(c) {
+  if (c >= 39) return '9.0'; if (c >= 37) return '8.5'; if (c >= 35) return '8.0';
+  if (c >= 32) return '7.5'; if (c >= 30) return '7.0'; if (c >= 26) return '6.5';
+  if (c >= 23) return '6.0'; if (c >= 18) return '5.5'; if (c >= 16) return '5.0';
+  if (c >= 13) return '4.5'; if (c >= 10) return '4.0'; if (c > 0) return '<4'; return '–';
+}
+
+function buildAnswerKey() {
+  const ua = getUserAnswers();
+  const container = document.getElementById('answerRows');
+  container.innerHTML = '';
+  let correct = 0, wrong = 0;
+
+  // Q1-15
+  for (let q = 1; q <= 15; q++) {
+    const u = ua[q]; const c = correctAnswers[q];
+    if (!c) continue;
+    const has = u !== undefined && u !== '';
+    const ok = has && isCorrect(u, c);
+    const cls = !has ? 'empty' : (ok ? 'correct' : 'incorrect');
+    if (ok) correct++; else if (has) wrong++;
+    addAnswerRow(container, 'Q'+q, has ? u : null, displayCorrect(c), cls);
+  }
+
+  // Q16-20
+  for (let q = 16; q <= 20; q++) {
+    const u = ua[q]; const c = correctAnswers[q];
+    const has = u !== undefined && u !== '';
+    const ok = has && isCorrect(u, c);
+    const cls = !has ? 'empty' : (ok ? 'correct' : 'incorrect');
+    if (ok) correct++; else if (has) wrong++;
+    addAnswerRow(container, 'Q'+q, has ? u : null, displayCorrect(c), cls);
+  }
+
+  // Multi groups
+  ['g1','g2','g3'].forEach((g, idx) => {
+    const labels = ['Q21–22','Q23–24','Q25–26'];
+    const picks = Array.from(multiSelected[g]).sort();
+    const matches = picks.filter(v => multiCorrect[g].includes(v)).length;
+    correct += matches; wrong += (2 - matches);
+    const cls = matches === 2 ? 'correct' : matches > 0 ? 'incorrect' : 'empty';
+    addAnswerRow(container, labels[idx],
+      picks.length ? picks.join(', ') : null,
+      multiCorrect[g].join(', ') + ` (${matches}/2 correct)`, cls);
+  });
+
+  // Q27-40
+  for (let q = 27; q <= 40; q++) {
+    const u = ua[q]; const c = correctAnswers[q];
+    const has = u !== undefined && u !== '';
+    const ok = has && isCorrect(u, c);
+    const cls = !has ? 'empty' : (ok ? 'correct' : 'incorrect');
+    if (ok) correct++; else if (has) wrong++;
+    addAnswerRow(container, 'Q'+q, has ? u : null, displayCorrect(c), cls);
+  }
+
+  document.querySelectorAll('input[type="text"][data-q]').forEach(inp => {
+    const q = parseInt(inp.dataset.q);
+    inp.classList.remove('correct','incorrect');
+    if (inp.value.trim()) inp.classList.add(isCorrect(inp.value.trim(), correctAnswers[q]) ? 'correct' : 'incorrect');
+  });
+
+  document.getElementById('statCorrect').textContent = correct;
+  document.getElementById('statWrong').textContent = wrong;
+  document.getElementById('statBand').textContent = bandFor(correct);
+}
+
+function addAnswerRow(container, qLabel, userVal, correctVal, cls) {
+  const userDisplay = userVal !== null && userVal !== '' ? userVal : '<span class="empty-val">— not answered —</span>';
+  const row = document.createElement('div');
+  row.className = 'answer-row '+cls;
+  row.innerHTML = `
+    <div class="answer-q">${qLabel}</div>
+    <div class="answer-your"><div class="answer-label">Your</div><div class="answer-value">${userDisplay}</div></div>
+    <div class="answer-correct"><div class="answer-label">Correct</div><div class="answer-value">${correctVal}</div></div>`;
+  container.appendChild(row);
+}
+
+function submitAnswers() {
+  const ua = getUserAnswers();
+  let correct = 0;
+  for (let q = 1; q <= 20; q++) if (ua[q] && isCorrect(ua[q], correctAnswers[q])) correct++;
+  ['g1','g2','g3'].forEach(g => {
+    correct += Array.from(multiSelected[g]).filter(v => multiCorrect[g].includes(v)).length;
+  });
+  for (let q = 27; q <= 40; q++) if (ua[q] && isCorrect(ua[q], correctAnswers[q])) correct++;
+
+  document.getElementById('modalScore').textContent = correct;
+  document.getElementById('modalBand').textContent = 'Estimated Band ' + bandFor(correct);
+  // Mark test as submitted (this reveals the Review Answers button in the header)
+  document.body.classList.add('test-submitted');
+  document.getElementById('resultsModal').classList.add('open');
+  document.getElementById('reviewBanner').classList.remove('show');
+}
+function closeModal() { document.getElementById('resultsModal').classList.remove('open'); }
+function openScript() { buildAnswerKey(); document.getElementById('scriptModal').classList.add('open'); }
+function closeScript() { document.getElementById('scriptModal').classList.remove('open'); }
+function openScriptFromResults() { closeModal(); openScript(); }
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeScript(); closeModal(); } });
+document.getElementById('scriptModal').addEventListener('click', e => { if (e.target.id === 'scriptModal') closeScript(); });
+
+/* ═══ HIGHLIGHT POPUP (with Highlight + Clear next to each other) ═══ */
+const hlPopup = document.getElementById('hl-popup');
+let lastHighlightTarget = null;
+
+function showHighlightPopup(eOrXY) {
+  const sel = window.getSelection();
+  if (!sel || sel.isCollapsed) { hlPopup.style.display = 'none'; return; }
+  const text = sel.toString().trim();
+  if (!text) { hlPopup.style.display = 'none'; return; }
+  let node = sel.anchorNode;
+  while (node) {
+    if (node.nodeType === 1) {
+      const tag = node.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || node.id === 'hl-popup') { hlPopup.style.display = 'none'; return; }
+    }
+    node = node.parentNode;
+  }
+  const range = sel.getRangeAt(0);
+  const rect = range.getBoundingClientRect();
+  // Determine if selection contains existing highlights
+  const container = range.commonAncestorContainer;
+  const wrapEl = (container.nodeType === 1 ? container : container.parentElement);
+  const containsHighlighted = wrapEl && wrapEl.querySelector ? !!wrapEl.querySelector('.highlighted') : false;
+  // Show clear option only if selection includes existing highlight
+  const clearBtn = hlPopup.querySelector('.hl-btn.clear');
+  clearBtn.style.display = containsHighlighted ? 'inline-block' : 'inline-block'; // always show for usability
+  const left = Math.max(8, rect.left + window.scrollX + rect.width/2 - 70);
+  hlPopup.style.top = (rect.bottom + window.scrollY + 6) + 'px';
+  hlPopup.style.left = left + 'px';
+  hlPopup.style.display = 'block';
+}
+document.addEventListener('mouseup', () => setTimeout(showHighlightPopup, 0));
+document.addEventListener('keyup', () => setTimeout(showHighlightPopup, 0));
+document.addEventListener('selectionchange', () => {
+  const sel = window.getSelection();
+  if (!sel || sel.isCollapsed || sel.toString().trim() === '') hlPopup.style.display = 'none';
+});
+
+function applyHighlight() {
+  const sel = window.getSelection();
+  if (!sel || sel.isCollapsed) return;
+  const range = sel.getRangeAt(0);
+  try {
+    const span = document.createElement('span');
+    span.className = 'highlighted';
+    range.surroundContents(span);
+  } catch(e) {
+    try {
+      const contents = range.extractContents();
+      const span = document.createElement('span');
+      span.className = 'highlighted';
+      span.appendChild(contents);
+      range.insertNode(span);
+    } catch(e2){}
+  }
+  sel.removeAllRanges();
+  hlPopup.style.display = 'none';
+}
+
+/* Clear highlights inside current selection (popup version) */
+function clearHighlightAt() {
+  const sel = window.getSelection();
+  if (sel && !sel.isCollapsed) {
+    const range = sel.getRangeAt(0);
+    const root = range.commonAncestorContainer.nodeType === 1 ? range.commonAncestorContainer : range.commonAncestorContainer.parentElement;
+    const all = root.querySelectorAll ? root.querySelectorAll('.highlighted') : [];
+    all.forEach(el => {
+      if (range.intersectsNode(el)) {
+        const p = el.parentNode; while (el.firstChild) p.insertBefore(el.firstChild, el); p.removeChild(el); p.normalize();
+      }
+    });
+    sel.removeAllRanges();
+  }
+  hlPopup.style.display = 'none';
+}
+
+function eraseHighlights() {
+  document.querySelectorAll('.highlighted').forEach(el => {
+    const p = el.parentNode; while (el.firstChild) p.insertBefore(el.firstChild, el); p.removeChild(el);
+  });
+}
+
+/* ═══ RESET ═══ */
+function resetAllAnswers() {
+  if (!confirm('Remove ALL your answers and start fresh?')) return;
+  document.querySelectorAll('input[type="text"][data-q]').forEach(inp => { inp.value = ''; inp.classList.remove('correct','incorrect'); });
+  document.querySelectorAll('select[data-q]').forEach(sel => sel.value = '');
+  document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+  document.querySelectorAll('.mcq-option.selected').forEach(o => o.classList.remove('selected'));
+  document.querySelectorAll('.multi-option.selected').forEach(o => o.classList.remove('selected'));
+  multiSelected.g1.clear(); multiSelected.g2.clear(); multiSelected.g3.clear();
+  document.getElementById('g1Count').textContent = '0';
+  document.getElementById('g2Count').textContent = '0';
+  document.getElementById('g3Count').textContent = '0';
+  eraseHighlights();
+  document.getElementById('progressCount').textContent = '0';
+  // Reset submission state
+  document.body.classList.remove('test-submitted');
+}
+</script>
+</body>
+</html>

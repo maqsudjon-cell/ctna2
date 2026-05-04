@@ -223,7 +223,8 @@
   body.sim-mode:not(.test-started) .part-section,
   body.sim-mode:not(.test-started) .part-tabs { display: none !important; }
 
-  /* Answer key is ONLY accessible via the results modal after submitting (no header button before submit). */
+  /* Hide answer-key trigger before submission */
+  body:not(.test-submitted) #scriptBtn { display: none !important; }
 
   @media (max-width: 600px) {
     .header-inner { padding: 8px 14px; height: auto; flex-wrap: wrap; }
@@ -281,8 +282,8 @@
       <button class="btn btn-ghost" onclick="eraseHighlights()">Clear Highlights</button>
       <button class="btn btn-ghost" onclick="resetAllAnswers()">↻ Reset</button>
       <button class="btn btn-ghost" onclick="changeMode()">↺ Mode</button>
-      <!-- The only way to reach the answer key is by submitting first. -->
-      <button class="btn btn-primary" onclick="submitAnswers()">✓ Submit</button>
+      <!-- Answer button hidden until submission to prevent cheating -->
+      <button class="btn btn-primary" id="scriptBtn" onclick="openScript()">📄 Review Answers</button>
     </div>
   </div>
 </header>

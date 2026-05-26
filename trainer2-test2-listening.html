@@ -579,7 +579,7 @@
     </div>
   </section>
 
-  <div class="submit-wrap">
+  <div class="submit-wrap" id="submitWrap" style="display:none">
     <button class="btn-submit" onclick="submitAnswers()">Submit Answers</button>
   </div>
 </main>
@@ -682,14 +682,17 @@ function loadTrackForPart(n) {
   player.load();
 }
 
+
 function switchPart(n) {
-  document.querySelectorAll('.part-tab').forEach(t => t.classList.remove('active'));
-  document.querySelector(`.part-tab[data-part="${n}"]`).classList.add('active');
-  document.querySelectorAll('.part-section').forEach(s => s.classList.remove('active'));
-  document.getElementById('part-'+n).classList.add('active');
-  if (currentMode !== 'simulation') loadTrackForPart(n);
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.querySelectorAll('.part-section').forEach((el,i) => {
+    el.classList.toggle('active', i+1 === n);
+  });
+  document.querySelectorAll('.part-tab').forEach((el,i) => {
+    el.classList.toggle('active', i+1 === n);
+  });
+  document.getElementById('submitWrap').style.display = n === 4 ? 'block' : 'none';
 }
+
 
 /* ═══ MODE LOGIC ═══ */
 let currentMode = null, currentSimSection = 0, reviewInterval = null, simHasStarted = false;
